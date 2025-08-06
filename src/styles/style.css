@@ -1,0 +1,9 @@
+:root {
+    --page-color: #dce9f5;
+    --search-button-color: #2f97f8;
+}
+
+body {
+    background-color: var(--page-color);
+}
+
