@@ -40,7 +40,12 @@ export default class WeatherData {
             throw new Error('Weather data not loaded yet');
         }
 
-        console.log(this.weatherData)
+        if (this.weatherData) {
+            console.log(this.daysData)
+            console.log(this.currentDate)
+            console.log(this.currentTemp)
+            console.log(this.currentCondition)
+        }
     }
 
     async init() {
@@ -48,4 +53,3 @@ export default class WeatherData {
         this.checkData()
     }
 }
-        
