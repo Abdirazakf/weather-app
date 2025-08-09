@@ -56,7 +56,7 @@ h4 {
     box-shadow: var(--shadow-sm);
     position: sticky;
     top: 0;
-    z-index: 1;
+    z-index: 10;
 }
 
 input {
