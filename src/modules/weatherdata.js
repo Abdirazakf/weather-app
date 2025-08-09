@@ -6,6 +6,7 @@ export default class WeatherData {
         this.currentTemp = null
         this.currentCondition = null
         this.isLoaded = false
+        this.isToggled = false
         this.search = 'New York'
     }
 
@@ -72,9 +73,9 @@ export default class WeatherData {
             throw new Error('Weather data not loaded yet');
         } else {
             console.log(this.daysData)
-            console.log(this.currentDate)
-            console.log(this.currentTemp)
-            console.log(this.currentCondition)
+            // console.log(this.currentDate)
+            // console.log(this.currentTemp)
+            // console.log(this.currentCondition)
         }
     }
 
@@ -84,7 +85,14 @@ export default class WeatherData {
         const temp = document.querySelector('.today > .temp')
         const degreeSymbol = document.createElement('sup')
         degreeSymbol.innerHTML = '&deg;'
-        temp.textContent = this.currentTemp
+
+        if (!this.isToggled){
+            temp.textContent = ((this.currentTemp - 32)/ (9/5)).toFixed(1)
+        } else {
+            temp.textContent = this.currentTemp
+        }
+        console.log(this.currentTemp)
+        
         temp.appendChild(degreeSymbol)
         const conditions = document.querySelector('.condition')
         conditions.textContent = this.currentCondition
@@ -92,7 +100,7 @@ export default class WeatherData {
 
     createWeeklyCards() {
         const container = document.querySelector('.container')
-        for (let i = 0; i < 6; i++){
+        for (let i = 1; i < 7; i++){
             const card = document.createElement('div')
             card.className = `day-${i} card`
 
@@ -109,11 +117,17 @@ export default class WeatherData {
     }
 
     displayWeekly() {
-        for (let i = 0; i < 6; i++){
+        for (let i = 1; i < 7; i++){
             const card = document.querySelector(`.day-${i}`)
 
             const temp = card.querySelector('.temp')
-            temp.textContent = this.daysData[i].temp
+
+            if (!this.isToggled){
+                temp.textContent = ((this.daysData[i].temp -32)/ (9/5)).toFixed(1)
+            } else {
+                temp.textContent = this.daysData[i].temp
+            }
+            // console.log(this.daysData[i].temp)
 
             const degreeSymbol = document.createElement('sup')
             degreeSymbol.innerHTML = '&deg;'
@@ -124,11 +138,30 @@ export default class WeatherData {
         }
     }
 
+    checkDegree() {
+        const degreeButton = document.querySelector('input[type="checkbox"]')
+
+        degreeButton.addEventListener('click', () => {
+            if (!this.isToggled){
+                this.isToggled = true
+            } else {
+                this.isToggled = false
+            }
+            
+            this.displayCurrentData()
+            this.displayWeekly()
+            console.log(this.isToggled)
+        })
+
+        return this.isToggled
+    }
+
     async init() {
         this.getSearchResult()
         await this.getData()
         this.createWeeklyCards()
         this.displayCurrentData()
         this.displayWeekly()
+        this.checkDegree()
     }
 }
