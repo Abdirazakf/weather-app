@@ -48,6 +48,7 @@ export default class WeatherData {
             this.isLoaded = true
 
             this.checkData()
+            this.displayCurrentData()
             
             return {
                 weatherData: this.weatherData,
@@ -65,7 +66,6 @@ export default class WeatherData {
         if (!this.isLoaded) {
             throw new Error('Weather data not loaded yet');
         } else {
-            console.log(this.weatherData)
             console.log(this.daysData)
             console.log(this.currentDate)
             console.log(this.currentTemp)
@@ -76,6 +76,10 @@ export default class WeatherData {
     displayCurrentData(){
         const header = document.querySelector('.location')
         header.textContent = this.search
+        const temp = document.querySelector('.temp')
+        temp.textContent = this.currentTemp
+        const conditions = document.querySelector('.condition')
+        conditions.textContent = this.currentCondition
     }
 
     async init() {

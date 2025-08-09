@@ -127,13 +127,11 @@ button:focus-visible {
     grid-row: 1;
     grid-column: 1 / -1;
     padding-left: 20px;
-    /* border: 1px solid red; */
 }
 
 .temp {
     align-self: center;
     font-size: 3rem;
-    border: 1px solid red;
 }
 
 .condition {
