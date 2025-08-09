@@ -114,6 +114,10 @@ export default class WeatherData {
 
             const temp = card.querySelector('.temp')
             temp.textContent = this.daysData[i].temp
+
+            const degreeSymbol = document.createElement('sup')
+            degreeSymbol.innerHTML = '&deg;'
+            temp.appendChild(degreeSymbol)
     
             const condition = card.querySelector('.condition')
             condition.textContent = this.daysData[i].conditions
