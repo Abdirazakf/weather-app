@@ -157,7 +157,7 @@ button[type="submit"]:active {
     padding-left: 10px;
     padding-bottom: 10px;
     color: var(--text-primary);
-    font-weight: 300;
+    font-weight: bolder;
     border-bottom: 1px solid var(--border-light);
     margin-bottom: 10px;
     display: flex;

@@ -34,7 +34,6 @@ export default class WeatherData {
         const card = document.querySelector('.day-1')
 
         try {
-            console.log(this.search)
             const response = await fetch(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${this.search}?key=NBLD24MKAWZY9998RU27GLF7W&include=days,current`, {
                 mode: 'cors'
             })
@@ -48,7 +47,6 @@ export default class WeatherData {
             this.currentTemp = data.currentConditions.temp
             this.isLoaded = true
 
-            this.checkData()
             this.displayCurrentData()
 
             if (card) {
@@ -73,9 +71,9 @@ export default class WeatherData {
             throw new Error('Weather data not loaded yet');
         } else {
             console.log(this.daysData)
-            // console.log(this.currentDate)
-            // console.log(this.currentTemp)
-            // console.log(this.currentCondition)
+            console.log(this.currentDate)
+            console.log(this.currentTemp)
+            console.log(this.currentCondition)
         }
     }
 
@@ -91,7 +89,6 @@ export default class WeatherData {
         } else {
             temp.textContent = this.currentTemp
         }
-        console.log(this.currentTemp)
         
         temp.appendChild(degreeSymbol)
         const conditions = document.querySelector('.condition')
@@ -127,7 +124,6 @@ export default class WeatherData {
             } else {
                 temp.textContent = this.daysData[i].temp
             }
-            // console.log(this.daysData[i].temp)
 
             const degreeSymbol = document.createElement('sup')
             degreeSymbol.innerHTML = '&deg;'
@@ -150,7 +146,6 @@ export default class WeatherData {
             
             this.displayCurrentData()
             this.displayWeekly()
-            console.log(this.isToggled)
         })
 
         return this.isToggled
