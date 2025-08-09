@@ -6,19 +6,23 @@
     <title>Weather App</title>
 </head>
 <body>
-    <div class="search-container">
+    <form class="search-form">
         <label for="search"><h4>Search:</h4></label>
         <input type="search" id="search">
-        <button>Enter</button>
-    </div>
+        <button type="submit">Enter</button>
+    </form>
     <div class="container">
-        <div class="today"></div>
-        <div class="day-1"></div>
-        <div class="day-2"></div>
-        <div class="day-3"></div>
-        <div class="day-4"></div>
-        <div class="day-5"></div>
-        <div class="day-6"></div>
+        <h1 class="location"></h1>
+        <div class="today card">
+            <h1 class="temp">23<sup>&deg;</sup></h1>
+            <h2 class="condition">Partially cloudy</h2>
+        </div>
+        <div class="day-1 card"></div>
+        <div class="day-2 card"></div>
+        <div class="day-3 card"></div>
+        <div class="day-4 card"></div>
+        <div class="day-5 card"></div>
+        <div class="day-6 card"></div>
     </div>
 </body>
 </html>

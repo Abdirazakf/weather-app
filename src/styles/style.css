@@ -5,6 +5,8 @@
 
 html,body {
     height: 100%;
+    box-sizing: border-box;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 body {
@@ -18,6 +20,10 @@ body {
 
 label {
     margin: 10px;
+}
+
+h1 {
+    margin: 0;
 }
 
 h4 {
@@ -80,7 +86,7 @@ button:focus-visible {
   box-shadow: none;
 }
 
-.search-container {
+.search-form {
     margin: 10px;
     display: flex;
     align-items: center;
@@ -95,20 +101,42 @@ button:focus-visible {
     border-radius: 20px;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    grid-auto-rows: 1fr;
-    gap: 50px;
+    grid-template-rows: 10px,1fr,1fr,1fr;
+    gap: 30px;
 }
 
 .today {
     width: 100%;
-    grid-row: 1;
+    grid-row: 2;
     grid-column: 1 / -1;
 }
 
-.container > * {
+.card {
     height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     border-radius: 30px;
     background: #e0e0e0;
     box-shadow: 15px 15px 30px #bebebe,
     -15px -15px 30px #ffffff;
+}
+
+.location {
+    font-size: 3vw;
+    grid-row: 1;
+    grid-column: 1 / -1;
+    padding-left: 20px;
+    /* border: 1px solid red; */
+}
+
+.temp {
+    align-self: center;
+    font-size: 3rem;
+    border: 1px solid red;
+}
+
+.condition {
+    align-self: center;
+    font-size: 1rem;
 }
