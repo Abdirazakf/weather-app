@@ -30,11 +30,11 @@ export default class WeatherData {
     }
 
     async getData(){
-        this.getSearchResult()
+        const card = document.querySelector('.day-1')
 
         try {
             console.log(this.search)
-            const response = await fetch(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${this.search}?key=292MCQGT7NMZ6WDTLJE6UDWLQ&include=days,current`, {
+            const response = await fetch(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${this.search}?key=NBLD24MKAWZY9998RU27GLF7W&include=days,current`, {
                 mode: 'cors'
             })
             
@@ -49,6 +49,10 @@ export default class WeatherData {
 
             this.checkData()
             this.displayCurrentData()
+
+            if (card) {
+                this.displayWeekly()
+            }
             
             return {
                 weatherData: this.weatherData,
@@ -59,6 +63,7 @@ export default class WeatherData {
             }
         } catch(err) {
             console.log(err)
+            alert('Error: Unable to find location')
         }
     }
 
@@ -76,15 +81,50 @@ export default class WeatherData {
     displayCurrentData(){
         const header = document.querySelector('.location')
         header.textContent = this.search
-        const temp = document.querySelector('.temp')
+        const temp = document.querySelector('.today > .temp')
+        const degreeSymbol = document.createElement('sup')
+        degreeSymbol.innerHTML = '&deg;'
         temp.textContent = this.currentTemp
+        temp.appendChild(degreeSymbol)
         const conditions = document.querySelector('.condition')
         conditions.textContent = this.currentCondition
+    }
+
+    createWeeklyCards() {
+        const container = document.querySelector('.container')
+        for (let i = 0; i < 6; i++){
+            const card = document.createElement('div')
+            card.className = `day-${i} card`
+
+            const temp = document.createElement('h1')
+            temp.className = 'temp'
+
+            const condition = document.createElement('h2')
+            condition.className = 'condition'
+
+            card.appendChild(temp)
+            card.appendChild(condition)
+            container.appendChild(card)
+        }
+    }
+
+    displayWeekly() {
+        for (let i = 0; i < 6; i++){
+            const card = document.querySelector(`.day-${i}`)
+
+            const temp = card.querySelector('.temp')
+            temp.textContent = this.daysData[i].temp
+    
+            const condition = card.querySelector('.condition')
+            condition.textContent = this.daysData[i].conditions
+        }
     }
 
     async init() {
         this.getSearchResult()
         await this.getData()
+        this.createWeeklyCards()
         this.displayCurrentData()
+        this.displayWeekly()
     }
 }
